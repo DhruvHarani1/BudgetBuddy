@@ -34,7 +34,7 @@ Budget Buddy is a console-based Java application designed to simplify expense ma
 ### **Installation**
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/budget-buddy.git
+   git clone https://github.com/DhruvHarani1/BudgetBuddy.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -70,7 +70,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 ## **Contact**
-For questions or feedback, feel free to reach out at **your.email@example.com**.
+For questions or feedback, feel free to reach out at **dhruvharani2042@gmail.com**.
 
 ---
 
