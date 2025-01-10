@@ -161,7 +161,6 @@ class SignUp {
                     flag = false;
                     System.out.print("\nPress Enter To Continue...");
                     sc.nextLine();
-
                     break;
             }
         } while (!flag);
@@ -186,7 +185,7 @@ class Login {
         do {
             System.out.print("Enter Mobile Number: ");
             loginMobileNumber = sc.nextLine();
-
+            
             for (int i = 0; i <= passiveUsers; i++) {
                 if (loginMobileNumber.equals(SU[i].mobileNumber)) {
                     System.out.print("Enter Pin: ");
