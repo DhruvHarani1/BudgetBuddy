@@ -9,6 +9,7 @@ public class Main {
         // important classes
         SignUp[] SU = new SignUp[100];
         Scanner sc = new Scanner(System.in);
+        Login L = new Login();
 
         // variables
         int userchoice;
@@ -16,8 +17,8 @@ public class Main {
 
         do {
 
-            System.out.println("Enter 1 for Login");
-            System.out.println("Enter 2 for SignUp");
+            System.out.println("Enter 1 for SignUp");
+            System.out.println("Enter 2 for Login");
             System.out.println("Enter 3 To Exit");
             System.out.print("Enter Number :");
             userchoice = sc.nextInt();
@@ -25,14 +26,14 @@ public class Main {
             // switch case
             switch (userchoice) {
                 case 1:
-                    // login
-                    break;
-                case 2:
                     for (int i = passiveUsers; i <= passiveUsers && i < SU.length; i++) {
                         SU[passiveUsers] = new SignUp();
-                        SU[passiveUsers].getDetails();
+                        SU[passiveUsers].getDetails(SU, passiveUsers);
                     }
                     passiveUsers++;
+                    break;
+                case 2:
+                    L.getLoginDetails(SU, passiveUsers);
                     break;
                 case 3:
                     // exit
@@ -64,7 +65,9 @@ class SignUp {
     // classes
     Scanner sc = new Scanner(System.in);
 
-    void getDetails() {
+    void getDetails(SignUp[] SU, int passiveUsers) {
+
+        // variables
         boolean flag; // to validate Mobile Number...
 
         System.out.print("Enter First Name: ");
@@ -89,6 +92,15 @@ class SignUp {
                     break;
                 }
             }
+
+            for (int i = 0; i < passiveUsers; i++) { // to validate if user already login
+                if (mobileNumber.equals(SU[i].mobileNumber)) {
+                    flag = false;
+                    System.out.println("User already exists! Please go to login.");
+                    break;
+                }
+            }
+
         } while (!flag);
 
         // loop for Pin...
@@ -109,43 +121,89 @@ class SignUp {
                     break;
                 }
             }
+
         } while (!flag);
 
-        //securtity question
+        // securtity question
         System.out.println("Worried! Of Forgetting Pin");
         System.out.println("Just SetUp a Security Question And Enjoy\n");
-        System.out.println("Press 1 for ---> Who is Your Favourite Teacher?");
-        System.out.println("Press 2 for ---> What is Your Favourite Food?");
-        System.out.println("Press 3 for ---> Which is Your Favourite Pet?");
 
-        int QuestionNumber = sc.nextInt();
-        sc.nextLine();
+        do {
 
-        switch (QuestionNumber) {
-            case 1:
-                SecurityQuestionDisplay = "Who is Your Favourite Teacher?";
-                System.out.print("Enter His Name: ");
-                SecurityAnswer = sc.nextLine();
-                break;
-            case 2:
-                SecurityQuestionDisplay = "What is Your Favourite Food?";
-                System.out.print("Enter Name Of Fruit : ");
-                SecurityAnswer = sc.nextLine();
-                System.out.println("\nSound's Delicious!\n");
-                break;
-            case 3:
-                SecurityQuestionDisplay = "Which is Your Favourite Pet?";
-                System.out.print("Enter Name Of Animal : ");
-                SecurityAnswer = sc.nextLine();
-                System.out.println("\nAwesome! You've chosen the best animal on the planet!\n");
-                break;
-            default:
-                System.out.println("\nERROR Press from 1 to 3");
-                sc.nextLine();
-                System.out.print("\nPress Enter To Continue...");
-                sc.nextLine();
-                break;
-        }
+            flag = true;
+            System.out.println("Press 1 for ---> Who is Your Favourite Teacher?");
+            System.out.println("Press 2 for ---> What is Your Favourite Food?");
+            System.out.println("Press 3 for ---> Which is Your Favourite Pet?");
+
+            int QuestionNumber = sc.nextInt();
+            sc.nextLine();
+
+            switch (QuestionNumber) {
+                case 1:
+                    SecurityQuestionDisplay = "Who is Your Favourite Teacher?";
+                    System.out.print("Enter His Name: ");
+                    SecurityAnswer = sc.nextLine();
+                    break;
+                case 2:
+                    SecurityQuestionDisplay = "What is Your Favourite Food?";
+                    System.out.print("Enter Name Of Fruit : ");
+                    SecurityAnswer = sc.nextLine();
+                    System.out.println("\nSound's Delicious!\n");
+                    break;
+                case 3:
+                    SecurityQuestionDisplay = "Which is Your Favourite Pet?";
+                    System.out.print("Enter Name Of Animal : ");
+                    SecurityAnswer = sc.nextLine();
+                    System.out.println("\nAwesome! You've chosen the best animal on the planet!\n");
+                    break;
+                default:
+                    System.out.println("\nERROR Press from 1 to 3");
+                    flag = false;
+                    System.out.print("\nPress Enter To Continue...");
+                    sc.nextLine();
+
+                    break;
+            }
+        } while (!flag);
+
+    }
+
+}
+
+class Login {
+
+    // classes
+    Scanner sc = new Scanner(System.in);
+
+    // variables
+    String loginMobileNumber;
+    String loginPassKey;
+
+    void getLoginDetails(SignUp[] SU, int passiveUsers) {
+
+        boolean flag = false;
+
+        do {
+            System.out.print("Enter Mobile Number: ");
+            loginMobileNumber = sc.nextLine();
+
+            for (int i = 0; i <= passiveUsers; i++) {
+                if (loginMobileNumber.equals(SU[i].mobileNumber)) {
+                    System.out.print("Enter Pin: ");
+                    loginPassKey = sc.nextLine();
+                    for (int j = 0; j <= passiveUsers; j++) {
+                        if (loginPassKey.equals(SU[i].PassKey)) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            if (!flag) {
+                System.out.println("\nInvalid Mobile number or PIN Retry!!!");
+            }
+        } while (!flag);
 
     }
 
