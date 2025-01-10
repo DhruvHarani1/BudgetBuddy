@@ -141,7 +141,7 @@ class SignUp {
 
             flag = true;
             System.out.println("Press 1 for ---> Who is Your Favourite Teacher?");
-            System.out.println("Press 2 for ---> What is Your Favourite Food?");
+            System.out.println("Press 2 for ---> What is Your Favourite Fruit?");
             System.out.println("Press 3 for ---> Which is Your Favourite Pet?");
 
             int QuestionNumber = sc.nextInt();
@@ -154,7 +154,7 @@ class SignUp {
                     SecurityAnswer = sc.nextLine();
                     break;
                 case 2:
-                    SecurityQuestionDisplay = "What is Your Favourite Food?";
+                    SecurityQuestionDisplay = "What is Your Favourite Fruit?";
                     System.out.print("Enter Name Of Fruit : ");
                     SecurityAnswer = sc.nextLine();
                     System.out.println("\nSound's Delicious!\n");
@@ -221,6 +221,8 @@ class Login {
 class MainPage {
 
     // Attributes
+    int totalExpensesTillDate=0;
+    int totalIncomeTillDate=0;
 
 
     // classes
@@ -243,7 +245,7 @@ class MainPage {
                     expenseCalculator(SU);
                     break;
                 case 2:
-
+                    incomeCalculator(SU);
                     break;
                 case 3:
                     // exit
@@ -262,7 +264,29 @@ class MainPage {
 
     //method to calc expense
     void expenseCalculator(SignUp SU){
-       
+
+        System.out.print("ENTER Expense: ");
+        long expense = sc.nextLong();
+
+        for (int i = totalExpensesTillDate; i <= totalExpensesTillDate; i++) {
+            SU.ExpenseLog[totalExpensesTillDate] = expense;
+            SU.Balance -= expense;
+        }
+        totalExpensesTillDate++; 
+    }
+
+    //method to calc Income
+    void incomeCalculator(SignUp SU){
+
+        System.out.print("ENTER Income: ");
+        long income = sc.nextLong();
+
+        for (int i = totalIncomeTillDate; i <= totalIncomeTillDate; i++) {
+            SU.IncomeLog[totalIncomeTillDate] = income;
+            SU.Balance += income;
+        }
+        totalIncomeTillDate++;
+
     }
 
 }
