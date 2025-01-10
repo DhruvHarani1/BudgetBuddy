@@ -10,6 +10,7 @@ public class Main {
         SignUp[] SU = new SignUp[100];
         Scanner sc = new Scanner(System.in);
         Login L = new Login();
+        MainPage MP = new MainPage();
 
         // variables
         int userchoice;
@@ -33,7 +34,9 @@ public class Main {
                     passiveUsers++;
                     break;
                 case 2:
-                    L.getLoginDetails(SU, passiveUsers);
+                    int logedUser = L.getLoginDetails(SU, passiveUsers);
+                    MP.mainpage(SU[logedUser]);
+
                     break;
                 case 3:
                     // exit
@@ -61,6 +64,12 @@ class SignUp {
     String PassKey;
     String SecurityQuestionDisplay;
     String SecurityAnswer;
+    long Balance =0;
+    long[] ExpenseLog = new long[100];
+    long[] IncomeLog = new long[100];
+    
+    
+
 
     // classes
     Scanner sc = new Scanner(System.in);
@@ -132,7 +141,7 @@ class SignUp {
 
             flag = true;
             System.out.println("Press 1 for ---> Who is Your Favourite Teacher?");
-            System.out.println("Press 2 for ---> What is Your Favourite Food?");
+            System.out.println("Press 2 for ---> What is Your Favourite Fruit?");
             System.out.println("Press 3 for ---> Which is Your Favourite Pet?");
 
             int QuestionNumber = sc.nextInt();
@@ -145,7 +154,7 @@ class SignUp {
                     SecurityAnswer = sc.nextLine();
                     break;
                 case 2:
-                    SecurityQuestionDisplay = "What is Your Favourite Food?";
+                    SecurityQuestionDisplay = "What is Your Favourite Fruit?";
                     System.out.print("Enter Name Of Fruit : ");
                     SecurityAnswer = sc.nextLine();
                     System.out.println("\nSound's Delicious!\n");
@@ -178,15 +187,17 @@ class Login {
     String loginMobileNumber;
     String loginPassKey;
 
-    void getLoginDetails(SignUp[] SU, int passiveUsers) {
+    int getLoginDetails(SignUp[] SU, int passiveUsers) {
 
+        // variables
         boolean flag = false;
+        int i;
 
         do {
             System.out.print("Enter Mobile Number: ");
             loginMobileNumber = sc.nextLine();
-            
-            for (int i = 0; i <= passiveUsers; i++) {
+
+            for (i = 0; i <= passiveUsers; i++) {
                 if (loginMobileNumber.equals(SU[i].mobileNumber)) {
                     System.out.print("Enter Pin: ");
                     loginPassKey = sc.nextLine();
@@ -203,6 +214,78 @@ class Login {
                 System.out.println("\nInvalid Mobile number or PIN Retry!!!");
             }
         } while (!flag);
+        return i;
+    }
+}
+
+class MainPage {
+
+    // Attributes
+    int totalExpensesTillDate=0;
+    int totalIncomeTillDate=0;
+
+
+    // classes
+    Scanner sc = new Scanner(System.in);
+
+    void mainpage(SignUp SU) {
+
+        // variables
+        int userinput;
+
+        do {
+            System.out.println("Enter 1) for Expense");
+            System.out.println("Enter 2) for Income");
+            System.out.println("Enter 3) for Exit");
+            System.out.print("Enter Number: ");
+            userinput = sc.nextInt();
+
+            switch (userinput) {
+                case 1:
+                    expenseCalculator(SU);
+                    break;
+                case 2:
+                    incomeCalculator(SU);
+                    break;
+                case 3:
+                    // exit
+                    break;
+
+                default:
+                    System.out.println("\nERROR Press from 1 to 3");
+                    sc.nextLine();
+                    System.out.print("\nPress Enter To Continue...");
+                    sc.nextLine();
+                    break;
+            }
+
+        } while (userinput != 3);
+    }
+
+    //method to calc expense
+    void expenseCalculator(SignUp SU){
+
+        System.out.print("ENTER Expense: ");
+        long expense = sc.nextLong();
+
+        for (int i = totalExpensesTillDate; i <= totalExpensesTillDate; i++) {
+            SU.ExpenseLog[totalExpensesTillDate] = expense;
+            SU.Balance -= expense;
+        }
+        totalExpensesTillDate++; 
+    }
+
+    //method to calc Income
+    void incomeCalculator(SignUp SU){
+
+        System.out.print("ENTER Income: ");
+        long income = sc.nextLong();
+
+        for (int i = totalIncomeTillDate; i <= totalIncomeTillDate; i++) {
+            SU.IncomeLog[totalIncomeTillDate] = income;
+            SU.Balance += income;
+        }
+        totalIncomeTillDate++;
 
     }
 
