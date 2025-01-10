@@ -10,6 +10,7 @@ public class Main {
         SignUp[] SU = new SignUp[100];
         Scanner sc = new Scanner(System.in);
         Login L = new Login();
+        MainPage MP = new MainPage();
 
         // variables
         int userchoice;
@@ -33,7 +34,9 @@ public class Main {
                     passiveUsers++;
                     break;
                 case 2:
-                    L.getLoginDetails(SU, passiveUsers);
+                    int logedUser = L.getLoginDetails(SU, passiveUsers);
+                    MP.mainpage(SU[logedUser]);
+
                     break;
                 case 3:
                     // exit
@@ -61,6 +64,12 @@ class SignUp {
     String PassKey;
     String SecurityQuestionDisplay;
     String SecurityAnswer;
+    long Balance =0;
+    long[] ExpenseLog = new long[100];
+    long[] IncomeLog = new long[100];
+    
+    
+
 
     // classes
     Scanner sc = new Scanner(System.in);
@@ -178,15 +187,17 @@ class Login {
     String loginMobileNumber;
     String loginPassKey;
 
-    void getLoginDetails(SignUp[] SU, int passiveUsers) {
+    int getLoginDetails(SignUp[] SU, int passiveUsers) {
 
+        // variables
         boolean flag = false;
+        int i;
 
         do {
             System.out.print("Enter Mobile Number: ");
             loginMobileNumber = sc.nextLine();
-            
-            for (int i = 0; i <= passiveUsers; i++) {
+
+            for (i = 0; i <= passiveUsers; i++) {
                 if (loginMobileNumber.equals(SU[i].mobileNumber)) {
                     System.out.print("Enter Pin: ");
                     loginPassKey = sc.nextLine();
@@ -203,7 +214,55 @@ class Login {
                 System.out.println("\nInvalid Mobile number or PIN Retry!!!");
             }
         } while (!flag);
+        return i;
+    }
+}
 
+class MainPage {
+
+    // Attributes
+
+
+    // classes
+    Scanner sc = new Scanner(System.in);
+
+    void mainpage(SignUp SU) {
+
+        // variables
+        int userinput;
+
+        do {
+            System.out.println("Enter 1) for Expense");
+            System.out.println("Enter 2) for Income");
+            System.out.println("Enter 3) for Exit");
+            System.out.print("Enter Number: ");
+            userinput = sc.nextInt();
+
+            switch (userinput) {
+                case 1:
+                    expenseCalculator(SU);
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+                    // exit
+                    break;
+
+                default:
+                    System.out.println("\nERROR Press from 1 to 3");
+                    sc.nextLine();
+                    System.out.print("\nPress Enter To Continue...");
+                    sc.nextLine();
+                    break;
+            }
+
+        } while (userinput != 3);
+    }
+
+    //method to calc expense
+    void expenseCalculator(SignUp SU){
+       
     }
 
 }
