@@ -2,8 +2,6 @@ package BudgetBuddy;
 
 import java.util.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -345,6 +343,7 @@ class Category {
     // classes
     Scanner sc = new Scanner(System.in);
 
+    //method for expense category
     String expenseCategory() {
 
         // variables
@@ -375,6 +374,7 @@ class Category {
         };
     }
 
+    //method for income category
     String incomeCategory() {
 
         // variables
