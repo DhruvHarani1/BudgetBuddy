@@ -1,6 +1,7 @@
 package BudgetBuddy;
 
 import java.util.*;
+import java.time.LocalDate;
 
 public class Main {
 
@@ -237,6 +238,7 @@ class MainPage {
                     for (int i = SU.expenseCount; i <= SU.expenseCount; i++) {
                         SU.EP[i] = new Expense();
                         SU.EP[i].expenseCalculator(SU);
+                        System.out.println("DATE: " + SU.EP[i].expense);
                     }
                     SU.expenseCount++;
                     break;
@@ -244,6 +246,8 @@ class MainPage {
                     for (int i = SU.incomeCount; i <= SU.incomeCount; i++) {
                         SU.IC[i] = new Income();
                         SU.IC[i].incomeCalculator(SU);
+                        System.out.println("DATE: " + SU.IC[i].date);
+
                     }
                     SU.incomeCount++;
                     break;
@@ -268,7 +272,7 @@ class Expense {
     // attributes
     long expense;
     String Discription;
-    // date
+    LocalDate date;
 
     // classes
     Scanner sc = new Scanner(System.in);
@@ -280,6 +284,9 @@ class Expense {
         expense = sc.nextLong();
         System.out.print("Enter Discription: ");
         Discription = sc.next();
+
+        date = LocalDate.now();
+
         SU.Balance -= expense;
     }
 }
@@ -289,7 +296,7 @@ class Income {
     // attributes
     long income;
     String Discription;
-    // date
+    LocalDate date;
 
     // classes
     Scanner sc = new Scanner(System.in);
@@ -297,10 +304,13 @@ class Income {
     // method to calc expense
     void incomeCalculator(SignUp SU) {
 
-        System.out.print("ENTER Expense: ");
+        System.out.print("ENTER Income: ");
         income = sc.nextLong();
         System.out.print("Enter Discription: ");
         Discription = sc.next();
+
+        date = LocalDate.now();
+
         SU.Balance += income;
     }
 }
