@@ -1,0 +1,13 @@
+# Variables information
+
+on line 16 --> userchoice ->it is used to take input whether user want to signin login or Exit
+on line 17--> passiveuser -> it showns the total number of app user 
+
+
+
+# classes information
+--> We have created signup class with 100 objects which can be scaled up in future
+
+
+#some important logics
+in line 30 to 35 --> we have a loop which makes object evertime a new user comes
