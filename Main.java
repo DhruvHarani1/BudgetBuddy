@@ -2,6 +2,7 @@ package BudgetBuddy;
 
 import java.util.*;
 import java.time.LocalDate;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -69,6 +70,7 @@ class SignUp {
     // classes
     Scanner sc = new Scanner(System.in);
 
+    // method for getting user details
     void getDetails(SignUp[] SU, int passiveUsers) {
 
         // variables
@@ -82,6 +84,7 @@ class SignUp {
         // loop for mobile number...
         do {
             flag = true;
+
             System.out.print("Enter Mobile Number: ");
             mobileNumber = sc.nextLine();
 
@@ -168,9 +171,7 @@ class SignUp {
                     break;
             }
         } while (!flag);
-
     }
-
 }
 
 class Login {
@@ -193,6 +194,7 @@ class Login {
             loginMobileNumber = sc.nextLine();
 
             for (i = 0; i <= passiveUsers; i++) {
+
                 if (loginMobileNumber.equals(SU[i].mobileNumber)) {
                     System.out.print("Enter Pin: ");
                     loginPassKey = sc.nextLine();
@@ -215,8 +217,6 @@ class Login {
 
 class MainPage {
 
-    // Attributes
-
     // classes
     Scanner sc = new Scanner(System.in);
 
@@ -237,7 +237,6 @@ class MainPage {
                     for (int i = SU.expenseCount; i <= SU.expenseCount; i++) {
                         SU.EP[i] = new Expense();
                         SU.EP[i].expenseCalculator(SU);
-                        System.out.println("DATE: " + SU.EP[i].date);
                     }
                     SU.expenseCount++;
                     break;
@@ -245,8 +244,6 @@ class MainPage {
                     for (int i = SU.incomeCount; i <= SU.incomeCount; i++) {
                         SU.IC[i] = new Income();
                         SU.IC[i].incomeCalculator(SU);
-                        System.out.println("DATE: " + SU.IC[i].date);
-
                     }
                     SU.incomeCount++;
                     break;
@@ -261,7 +258,6 @@ class MainPage {
                     sc.nextLine();
                     break;
             }
-
         } while (userinput != 3);
     }
 }
@@ -293,11 +289,9 @@ class Expense {
             if (category.equals("")) {
                 System.out.println("Enter A Valid number From 1 to 10.");
             }
-
         } while (category.equals(""));
 
         date = LocalDate.now();
-
         SU.Balance -= expense;
     }
 }
@@ -329,7 +323,6 @@ class Income {
             if (category.equals("")) {
                 System.out.println("Enter A Valid number From 1 to 10.");
             }
-            
         } while (category.equals(""));
 
         date = LocalDate.now();
@@ -343,7 +336,7 @@ class Category {
     // classes
     Scanner sc = new Scanner(System.in);
 
-    //method for expense category
+    // method for expense category
     String expenseCategory() {
 
         // variables
@@ -374,7 +367,7 @@ class Category {
         };
     }
 
-    //method for income category
+    // method for income category
     String incomeCategory() {
 
         // variables
