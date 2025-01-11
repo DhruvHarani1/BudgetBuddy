@@ -2,6 +2,7 @@ package BudgetBuddy;
 
 import java.util.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
 
@@ -308,7 +309,6 @@ class Income {
         income = sc.nextLong();
         System.out.print("Enter Discription: ");
         Discription = sc.next();
-
         date = LocalDate.now();
 
         SU.Balance += income;
