@@ -239,7 +239,7 @@ class MainPage {
                     for (int i = SU.expenseCount; i <= SU.expenseCount; i++) {
                         SU.EP[i] = new Expense();
                         SU.EP[i].expenseCalculator(SU);
-                        System.out.println("DATE: " + SU.EP[i].expense);
+                        System.out.println("DATE: " + SU.EP[i].date);
                     }
                     SU.expenseCount++;
                     break;
@@ -272,11 +272,13 @@ class Expense {
 
     // attributes
     long expense;
-    String Discription;
+    String discription;
     LocalDate date;
+    String category = "";
 
     // classes
     Scanner sc = new Scanner(System.in);
+    Category CG = new Category();
 
     // method to calc expense
     void expenseCalculator(SignUp SU) {
@@ -284,7 +286,17 @@ class Expense {
         System.out.print("ENTER Expense: ");
         expense = sc.nextLong();
         System.out.print("Enter Discription: ");
-        Discription = sc.next();
+        discription = sc.next();
+
+        // select category
+        do {
+            category = CG.expenseCategory();
+
+            if (category.equals("")) {
+                System.out.println("Enter A Valid number From 1 to 10.");
+            }
+
+        } while (category.equals(""));
 
         date = LocalDate.now();
 
@@ -296,11 +308,13 @@ class Income {
 
     // attributes
     long income;
-    String Discription;
+    String discription;
     LocalDate date;
+    String category = "";
 
     // classes
     Scanner sc = new Scanner(System.in);
+    Category CG = new Category();
 
     // method to calc expense
     void incomeCalculator(SignUp SU) {
@@ -308,9 +322,86 @@ class Income {
         System.out.print("ENTER Income: ");
         income = sc.nextLong();
         System.out.print("Enter Discription: ");
-        Discription = sc.next();
+        discription = sc.next();
+
+        // select category
+        do {
+            category = CG.incomeCategory();
+
+            if (category.equals("")) {
+                System.out.println("Enter A Valid number From 1 to 10.");
+            }
+            
+        } while (category.equals(""));
+
         date = LocalDate.now();
 
         SU.Balance += income;
+    }
+}
+
+class Category {
+
+    // classes
+    Scanner sc = new Scanner(System.in);
+
+    String expenseCategory() {
+
+        // variables
+        String category;
+
+        System.out.println("\t\t\t\tSelect Category from Below\n\n");
+
+        System.out.println("1) Transport \t\t\t\t 2) Food");
+        System.out.println("3) Medical \t\t\t\t 4) Housing");
+        System.out.println("5) Shopping \t\t\t\t 6) Education");
+        System.out.println("7) Personal Care\t\t8) Savings");
+        System.out.println("9) Debt Payment\t\t10) Others");
+
+        int selectedcategory = sc.nextInt();
+
+        return switch (selectedcategory) {
+            case 1 -> category = "Transort";
+            case 2 -> category = "Food";
+            case 3 -> category = "Medical";
+            case 4 -> category = "Housing";
+            case 5 -> category = "Shopping";
+            case 6 -> category = "Education";
+            case 7 -> category = "Personal Care";
+            case 8 -> category = "Savings";
+            case 9 -> category = " Debt Payment";
+            case 10 -> category = "Others";
+            default -> "";
+        };
+    }
+
+    String incomeCategory() {
+
+        // variables
+        String category;
+
+        System.out.println("\t\t\t\tSelect Category from Below\n\n");
+
+        System.out.println("1) Salary \t\t\t\t 2) Investment Return");
+        System.out.println("3) Savings \t\t\t\t 4) Cash in Hand");
+        System.out.println("5) Bank Balance \t\t\t6) UPI Wallet");
+        System.out.println("7) Loans \t\t\t\t 8) Scholarships");
+        System.out.println("9) FreeLancing \t\t\t\t 10) Others");
+
+        int selectedcategory = sc.nextInt();
+
+        return switch (selectedcategory) {
+            case 1 -> category = "Salary";
+            case 2 -> category = "Investment Return";
+            case 3 -> category = "Savings";
+            case 4 -> category = "Cash in Hand";
+            case 5 -> category = "Bank Balance";
+            case 6 -> category = "UPI Wallet";
+            case 7 -> category = "Loans";
+            case 8 -> category = "Scholarships";
+            case 9 -> category = "FreeLancing";
+            case 10 -> category = "Others";
+            default -> "";
+        };
     }
 }
